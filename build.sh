@@ -449,9 +449,4 @@ Build
 CreateReleaseInfo
 RunWebpack
 PackageMono
-PackageMacOS
-PackageMacOSApp
-PackageTestsMono
-PackageTestsWindows
-PackageWindows
 PublishArtifacts
