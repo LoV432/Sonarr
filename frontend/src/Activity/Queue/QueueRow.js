@@ -19,6 +19,7 @@ import QueueStatusCell from './QueueStatusCell';
 import TimeleftCell from './TimeleftCell';
 import RemoveQueueItemModal from './RemoveQueueItemModal';
 import styles from './QueueRow.css';
+import formatBytes from 'Utilities/Number/formatBytes';
 
 class QueueRow extends Component {
 
@@ -41,14 +42,14 @@ class QueueRow extends Component {
     this.setState({ isRemoveQueueItemModalOpen: true });
   }
 
-  onRemoveQueueItemModalConfirmed = (blacklist) => {
+  onRemoveQueueItemModalConfirmed = (blocklist) => {
     const {
       onRemoveQueueItemPress,
       onQueueRowModalOpenOrClose
     } = this.props;
 
     onQueueRowModalOpenOrClose(false);
-    onRemoveQueueItemPress(blacklist);
+    onRemoveQueueItemPress(blocklist);
 
     this.setState({ isRemoveQueueItemModalOpen: false });
   }
@@ -280,6 +281,12 @@ class QueueRow extends Component {
               );
             }
 
+            if (name === 'size') {
+              return (
+                <TableRowCell key={name}>{formatBytes(size)}</TableRowCell>
+              );
+            }
+
             if (name === 'outputPath') {
               return (
                 <TableRowCell key={name}>
@@ -370,6 +377,7 @@ class QueueRow extends Component {
           isOpen={isRemoveQueueItemModalOpen}
           sourceTitle={title}
           canIgnore={!!series}
+          isPending={isPending}
           onRemovePress={this.onRemoveQueueItemModalConfirmed}
           onModalClose={this.onRemoveQueueItemModalClose}
         />
